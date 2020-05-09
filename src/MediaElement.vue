@@ -1,7 +1,12 @@
 <template>
   <section>
     <video id="video" :poster="poster" :preload="preload" controls>
-      <source v-for="source in sources" :key="source.src" :src="source.src" :type="source.type" >
+      <source
+        v-for="source in sources"
+        :key="source.src"
+        :src="source.src"
+        :type="source.type"
+      />
     </video>
   </section>
 </template>
@@ -9,39 +14,35 @@
 <script>
 import "mediaelement";
 import "mediaelement/build/renderers/facebook.min.js";
-import 'mediaelement/build/mediaelementplayer.min.css';
-
-
+import "mediaelement/build/mediaelementplayer.min.css";
 
 export default {
   props: {
-    id:{
+    id: {
       type: String,
-      required: true
+      required: true,
     },
     sources: {
       type: Array,
-      required: true
+      required: true,
     },
     poster: {
-      type: String
+      type: String,
     },
     muted: {
       type: Boolean,
-      default: true
+      default: true,
     },
     preload: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   data() {
-    return {
-    };
+    return {};
   },
-  watch: {
-  },
+  watch: {},
   mounted() {
     this.options = {
       stretching: "responsive",
@@ -50,13 +51,15 @@ export default {
       shimScriptAccess: "always",
       success: (mediaElement, node, instance) => {
         mediaElement.load();
-      }
+      },
     };
-    this.player= this.playerObejct = new MediaElementPlayer(this.id, this.options);
-  }
+    this.player = this.playerObejct = new MediaElementPlayer(
+      this.id,
+      this.options
+    );
+  },
 };
 </script>
-
 
 <style>
 .mejs__overlay-button {
